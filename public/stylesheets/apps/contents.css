@@ -1,0 +1,112 @@
+.btn_box{
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  margin: -2px 0 0 -17px;
+  overflow: hidden;
+  background: #8a96ab;
+}
+/*btn_reload overwrite*/
+.info_bar .btn_reload {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.map-view {
+  height: 492px;
+}
+.marker {
+  font-size: 11px;
+  padding-top: 0px;
+  padding-left: 3px;
+  margin-top: -13px;
+  color: #fff;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  -moz-text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  -webkit-text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  background: url('/images/apps/ico/map_point.png') no-repeat center top;
+  background-size: 25px;
+}
+.event-marker {
+  border: 1px solid;
+  background-color: #fff;
+  color: #000;
+  font-size: 10px;
+  line-height: 1;
+  border-radius: 8px;
+  padding: 3px;
+  text-align: center;
+}
+.graph-bar {
+  -webkit-transition: height 5s;
+  -ms-transition: height 5s;
+  transition: height 5s;
+}
+.gauge-graph {
+  height: 207px;
+  position: relative;
+}
+.spin {
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{
+	from{transform:rotate(0deg)}
+	to{transform:rotate(360deg)}
+}
+/*Toast message CSS*/
+#toast {
+  position: absolute;
+  z-index: 5000;
+  top:20px;
+  left: 20px;
+  bottom:0;
+  overflow:hidden;
+}
+.toast{
+  color : white;
+  background:#456;
+  margin:0px 0px 10px 0px;
+  width:300px;
+  border-radius:0px;
+  background: #346;
+  box-sizing:border-box;
+  box-shadow:0px 2px 6px rgba(0, 0, 0, 0.3);
+  transition:all 0.5s;
+  user-select:none;
+  overflow:hidden;
+  height:80px;
+}
+.toastClose{
+  height:0px;
+  border: none;
+  margin: 0px;
+  opacity: 0;
+}
+#toast .up {
+  border-radius: 2px;
+  animation: toast 1s;
+  display: table;
+}
+
+.toast > span{
+  font-size: 1.2em;
+  position:relative;
+  padding:20px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.toast > span span{
+  position:absolute;
+  opacity:0.5;
+  right:12px;
+  top:10px;
+  cursor:pointer;
+}
+.toast div span:hover{
+  opacity:1;
+}
+
+@keyframes toast {
+  0%{ transform: translateY(2000px); }
+}

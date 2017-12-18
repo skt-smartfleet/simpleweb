@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="robots" content="all">
+    <title>Simple Web App</title>
+    <link type="text/css" rel="stylesheet" href="/javascripts/pkg/select2-4.0.3/dist/css/select2.css">
+    <link rel="stylesheet" href="/javascripts/pkg/jquery-ui.min.css">
+    <link type="text/css" rel="stylesheet" href="/stylesheets/apps/common.css">
+    <link type="text/css" rel="stylesheet" href="/stylesheets/apps/contents.css">
+    <link rel='stylesheet' href='/stylesheets/apps/guage.css' />
+    <script type="text/javascript" src="/javascripts/pkg/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/javascripts/pkg/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/javascripts/pkg/select2-4.0.3/dist/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="/javascripts/apps/common.js"></script>
+  </head>
+  <body>
+    <p id="skiptoContent"><a href="#container">본문으로 바로가기</a></p>
+    <div id="toast"></div>
+    <div id="wrapper">
+
+    	<div id="header">
+    		<div class="inner_box">
+    			<h1 class="logo"><a href="#"><img src="/images/apps/common/logo.png" alt="Simple Web App"></a><span class="version">Version 1.0.0</span></h1>
+          <div class="user_menu">
+            <!-- 로그인 <a href="#" class="btn_login"><span class="blind">로그인</span></a> -->
+            <a href="javascript:logout();" class="btn_logout"><span class="blind">로그아웃</span></a>
+          </div>
+        </div>
+    	</div>
+
+      <div id="infoBar" class="info_bar">
+        <div class="inner_box">
+          <div class="btn_box">
+            <button type="button" class="btn_reload" onclick="fnRefresh();"><span class="blind">새로고침</span></button>
+          </div>
+
+          <label for="vehiclesList">차량</label>
+          <select id="vehiclesList" onchange="setSearchBar(true);">
+            <option value="">-- 차량 선택 --</option>
+          </select>
+
+          <label for="tripList">트립</label>
+          <select id="tripList" onchange="getMicrotrip();">
+            <option value="">-- 트립 선택 --</option>
+          </select>
+
+          <label for="driverName">드라이버</label>
+          <input type="text" id="driverName" name="driverName" readonly>
+
+          <button type="button" id="requestOpener" class="btn_send"><span class="blind">Send RPC</span></button><!-- 클릭시 레이어팝업 오픈 -->
+        </div>
+      </div>
+
+    	<div id="container">
+
+        <!-- row -->
+        <div class="row">
+
+          <!-- 지도 -->
+          <div class="panner map">
+            <h2 class="tit">지도</h2>
+            <div class="map-view">
+              <div id="map_div"></div>
+              <!-- 지도아이콘 -->
+              <!--
+              <div class="map_point" style="position:absolute;left:50%;top:150px;margin-left:-21px;"><img src="/images/apps/ico/map_point.png" width="42" height="54"></div>
+              -->
+              <!-- // 지도아이콘 -->
+            </div>
+          </div>
+          <!-- // 지도 -->
+
+          <!-- 속도 -->
+          <div class="panner speed">
+            <h2 class="tit">속도</h2>
+            <div class="cont">
+              <div id="gaugeSpeed" class="box_graph gauge-graph">
+                <!-- <div style="width:184px;height:184px;margin:12px auto 0 auto;text-align:center;"><img src="../img/ico/@temp.png" width="184" height="184"></div>그래프 영역 임시이미지 -->
+              </div>
+            </div>
+          </div>
+          <!-- // 속도 -->
+
+          <!-- 속도 -->
+          <div class="panner engine">
+            <h2 class="tit">엔진 부하</h2>
+            <div class="cont">
+              <div id="gaugeEngine" class="box_graph gauge-graph">
+                <!-- <div style="width:184px;height:184px;margin:12px auto 0 auto;text-align:center;"><img src="../img/ico/@temp.png" width="184" height="184"></div> 그래프 영역 임시이미지 -->
+              </div>
+            </div>
+          </div>
+          <!-- // 속도 -->
+
+          <!-- 전압 -->
+          <div class="panner voltage">
+            <h2 class="tit">차량 전압</h2>
+            <div class="cont">
+              <div class="box_graph">
+                <div class="graph">
+                  <div class="bg">
+                    <span class="graph-bar"></span> <!-- style="height:70%;" 값 제어 -->
+                  </div>
+                  <span class="img"><img src="/images/apps/ico/graph_type1.png"></span>
+                </div>
+              </div>
+              <div class="txt"><strong>0.0</strong>v</div>
+            </div>
+          </div>
+          <!-- // 전압 -->
+
+          <!-- 냉각수온도 -->
+          <div class="panner temperature">
+            <h2 class="tit">냉각수 온도</h2>
+            <div class="cont">
+              <div class="box_graph">
+                <div class="graph">
+                  <div class="bg">
+                    <span class="graph-bar"></span> <!-- style="height:100%;" 값 제어 -->
+                  </div>
+                  <span class="img"><img src="/images/apps/ico/graph_type2.png"></span>
+                </div>
+              </div>
+              <div class="txt"><strong>0.0</strong>℃</div>
+            </div>
+          </div>
+          <!-- // 냉각수온도 -->
+        </div>
+        <!-- // row -->
+
+        <!-- row -->
+        <div class="row">
+
+          <!-- 트래픽이벤트 -->
+          <div class="panner traffic">
+            <h2 class="tit">트래픽 이벤트</h2>
+            <button type="button" class="btn_view" id="trafficOpener">전체보기</button><!-- 클릭시 레이어팝업 오픈 -->
+            <div class="cont">
+              <div class="box_table">
+                <table class="table_type1">
+                  <caption>트래픽 이벤트</caption>
+                  <colgroup>
+                    <col width="30%"></col>
+                    <col width="30%"></col>
+                    <col width="20%"></col>
+                    <col width="20%"></col>
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">일시</th>
+                      <th scope="col">위치</th>
+                      <th scope="col">차량</th>
+                      <th scope="col">이벤트</th>
+                    </tr>
+                  </thead>
+                  <tbody class="traffic-list">
+                    <!--
+                    <tr>
+                      <td colspan="4" class="no_data">결과가 없습니다.</td>
+                    </tr>
+                     -->
+                    <tr>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- // 트래픽이벤트 -->
+
+          <!-- 콘솔로그 -->
+          <div class="panner log">
+            <h2 class="tit">콘솔로그</h2>
+            <button type="button" class="btn_view" id="logOpener">전체보기</button><!-- 클릭시 레이어팝업 오픈 -->
+
+            <div class="cont">
+              <div class="box_log" id="consoleArea">
+               <!-- <p class="no_data">결과가 없습니다.</p> -->
+              </div>
+            </div>
+          </div>
+          <!-- // 콘솔로그 -->
+        </div>
+        <!-- // row -->
+    	</div>
+
+    </div>
+
+
+    <!-- Request popup -->
+    <div id="dialogRequest" class="pop_wrap" title="Request">
+      <textarea cols="40" rows="10" id="" name="" class="inp_textarea"></textarea>
+      <button type="submit" id="" name="" class="btn_send" onclick="fnRPCSend();">Send</button>
+    </div>
+    <!-- // Request popup -->
+
+
+    <!-- Traffic popup -->
+    <div id="dialogTraffic" class="pop_wrap" title="트래픽 이벤트">
+
+    </div>
+    <!-- // Traffic popup -->
+
+
+    <!-- Log popup -->
+    <div id="dialogLog" class="pop_wrap" title="콘솔 로그">
+
+    </div>
+    <!-- // Log popup -->
+
+
+    <script>
+      //Request popup
+      $( "#dialogRequest" ).dialog({
+        autoOpen:false,
+        modal:true,
+        width:460
+      });
+      $( "#requestOpener" ).click(function() {
+        let v_dt = JSON.parse( sessionStorage.getItem(vehiclesList.value) );
+        if(v_dt == null) return alert('대상 차량을 먼저 선택하십시오');
+        setDefaultRPC(v_dt.vid);
+        $( "#dialogRequest" ).dialog( "open" );
+        $( '.ui-resizable[role="dialog"]' ).css({
+          'z-index' : 10000
+        });
+        $( '.ui-widget-overlay' ).css({
+          'z-index' : 5000
+        });
+      });
+
+      //Traffic popup
+      $( "#dialogTraffic" ).dialog({
+        autoOpen:false,
+        modal:true,
+        width:600
+      });
+      $( "#trafficOpener" ).click(function() {
+        $( "#dialogTraffic" ).empty();
+        $( "#dialogTraffic" ).dialog( "open" );
+        $( ".box_table" ).clone().appendTo( "#dialogTraffic" );
+        $( '.ui-resizable[role="dialog"]' ).css({
+          'z-index' : 10000
+        });
+        $( '.ui-widget-overlay' ).css({
+          'z-index' : 5000
+        });
+      });
+
+      //Log popup
+      $( "#dialogLog" ).dialog({
+        autoOpen:false,
+        modal:true,
+        width:600
+      });
+      $( "#logOpener" ).click(function() {
+        $( "#dialogLog" ).empty();
+        $( "#dialogLog" ).dialog( "open" );
+        $( "#consoleArea" ).clone().appendTo( "#dialogLog" );
+        $( '.ui-resizable[role="dialog"]' ).css({
+          'z-index' : 10000
+        });
+        $( '.ui-widget-overlay' ).css({
+          'z-index' : 5000
+        });
+      });
+    </script>
+    <script language="javascript" src=<%= tmapUrl %>></script>
+    <script type="text/javascript" src="/javascripts/apps/map.js"></script>
+    <script type="text/javascript" src="/javascripts/apps/console.js"></script>
+    <script type="text/javascript" src="/javascripts/apps/gauge.js"></script>
+    <script type="text/javascript" src="/javascripts/apps/rpc.js"></script>
+    <script type="text/javascript" src="/javascripts/apps/main.js"></script>
+  </body>
+</html>

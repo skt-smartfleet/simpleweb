@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/auth.css' />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/auth.js"></script>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+
+    <!-- 로그인폼 -->
+    <div class="login-page">
+      <div class="login_area">
+        <fieldset class="login_form">
+          <legend class="blind">로그인</legend>
+          <div>
+            <label class="blind" for="input_id">아이디 입력</label>
+            <input type="text" id="input_id" class="input form" placeholder="아이디"/>
+          </div>
+          <div>
+            <label class="blind" for="input_pw">패스워드 입력</label>
+            <input type="password" id="input_pw" class="input form" placeholder="패스워드"/>
+          </div>
+          <div>
+            <input type="submit" class="btn" title="로그인" alt="로그인" value="로그인" onclick="fnLogin()">
+          </div>
+        </fieldset>
+      </div>
+    </div>
+
+  </body>
+</html>
