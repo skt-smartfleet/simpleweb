@@ -71,11 +71,11 @@ OS별 실행 패키지
 
 처음 접속하면 로그인 페이지로 이동한다.
 
-아이디<sup>1</sup>, 패스워드<sup>2</sup>란에 자신의 [Smart Fleet](http://smartfleet.sktelecom.com:9000/) 계정을 입력한다.
+아이디<sup>1</sup>, 패스워드<sup>2</sup>란에 자신의 [Smart Fleet](http://smartfleet.sktelecom.com/) 계정을 입력한다.
 
-계정이 없을 경우 [Smart Fleet](http://smartfleet.sktelecom.com:9000/) 에서 계정을 생성한다.
+계정이 없을 경우 [Smart Fleet](http://smartfleet.sktelecom.com/) 에서 계정을 생성한다.
 로그인할 때 계정에 회사, 차량, 센서 정보가 정상적으로 등록되어 있어야 한다. 그렇지 않으면 자동으로 로그아웃된다.
-위의 엔티티 또한 [Smart Fleet](http://smartfleet.sktelecom.com:9000/) 통해 등록할 수 있다.
+위의 엔티티 또한 [Smart Fleet](http://smartfleet.sktelecom.com/) 통해 등록할 수 있다.
 
 로그인 버튼<sup>3</sup> 클릭 후 인증 성공하면 Simple Web App 페이지로 이동한다.
 
