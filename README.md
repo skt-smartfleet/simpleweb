@@ -12,8 +12,8 @@ npm install
 ## 2. 설정
 
 실행하기 전에 파일 혹은 파라미터로 **port, appkey** 를 먼저 설정한다.
-appkey에 [SK플래닛 개발자센터](https://developers.skplanetx.com/)에서 제공하는 인증 키를 입력한다. 인증 키는 T map 서비스를 이용할 수 있어야 한다.
-기본 포트는 3000이다.
+appkey에 [SK텔레콤 개발자센터](https://developers.sktelecom.com/)에서 제공하는 인증 키를 입력한다. 인증 키는 T map biz API 서비스를 이용할 수 있어야 한다.
+기본 포트는 3000이다. (상용화 시 계약 필요)
 
 ### 2.1. 파일 수정(config.js)
 
