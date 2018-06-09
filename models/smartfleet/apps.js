@@ -223,7 +223,7 @@ exports.api = {
     };
     request({
       method : 'get',
-      url : "https://apis.skplanetx.com/tmap/geo/reversegeocoding",
+      url : "https://api2.sktelecom.com/tmap/geo/reversegeocoding",
       headers : headersOpt,
       qs : {version: 1, lat:lat, lon:lon, addressType:"A01"},
       json : true

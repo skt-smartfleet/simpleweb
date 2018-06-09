@@ -11,7 +11,7 @@ for(var i = 2; i< process.argv.length ; i++){
   }
 }
 
-var tmap_url = 'https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey='+config.appkey;
+var tmap_url = 'https://api2.sktelecom.com/tmap/js?version=1&format=javascript&appKey='+config.appkey;
 /* GET App listing. */
 router.get('/', function(req, res, next){
     res.render('apps', { tmapUrl: tmap_url });
